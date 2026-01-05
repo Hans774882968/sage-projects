@@ -7,6 +7,8 @@ _sage_const_1 = Integer(1)
 _sage_const_2 = Integer(2)
 _sage_const_3 = Integer(3)
 _sage_const_4 = Integer(4)
+import os
+
 R = PolynomialRing(QQ, order='lex', names=('t', 'x', 'y',))
 (t, x, y,) = R._first_ngens(3)
 f = (x + _sage_const_1) * (y + _sage_const_2) + t * (x ** _sage_const_2 + y ** _sage_const_2 - _sage_const_1)
@@ -49,14 +51,9 @@ goal = (x + _sage_const_1) * (y + _sage_const_2)
 ans = goal.subs(y=wanted_y)
 ans_simplified = ans.simplify_full()
 n_ans = ans.n()
-print(f'已吓哭~\nx的数值解 = {wanted_x_n}\ny的数值解 = {wanted_y_n}\n{latex(wanted_y)}\nans = {ans}\n{latex(ans)}\n{latex(ans_simplified)}\n{n_ans}')
-r'''
-已吓哭~
-x的数值解 = 0.817182646506771
-y的数值解 = 0.576378801005197
-\frac{1}{6} \, {\left(3 \, \sqrt{61} \sqrt{3} + 62\right)}^{\frac{1}{3}} + \frac{13}{6 \, {\left(3 \, \sqrt{61} \sqrt{3} + 62\right)}^{\frac{1}{3}}} - \frac{2}{3}
-ans = 1/108*(((3*sqrt(61)*sqrt(3) + 62)^(1/3) + 13/(3*sqrt(61)*sqrt(3) + 62)^(1/3) - 4)^2 + 6*(3*sqrt(61)*sqrt(3) + 62)^(1/3) + 78/(3*sqrt(61)*sqrt(3) + 62)^(1/3) - 24)*((3*sqrt(61)*sqrt(3) + 62)^(1/3) + 13/(3*sqrt(61)*sqrt(3) + 62)^(1/3) + 8)
-\frac{1}{108} \, {\left({\left({\left(3 \, \sqrt{61} \sqrt{3} + 62\right)}^{\frac{1}{3}} + \frac{13}{{\left(3 \, \sqrt{61} \sqrt{3} + 62\right)}^{\frac{1}{3}}} - 4\right)}^{2} + 6 \, {\left(3 \, \sqrt{61} \sqrt{3} + 62\right)}^{\frac{1}{3}} + \frac{78}{{\left(3 \, \sqrt{61} \sqrt{3} + 62\right)}^{\frac{1}{3}}} - 24\right)} {\left({\left(3 \, \sqrt{61} \sqrt{3} + 62\right)}^{\frac{1}{3}} + \frac{13}{{\left(3 \, \sqrt{61} \sqrt{3} + 62\right)}^{\frac{1}{3}}} + 8\right)}
-\frac{{\left(5 \, \sqrt{61} \sqrt{3} + 216\right)} {\left(3 \, \sqrt{61} \sqrt{3} + 62\right)}^{\frac{2}{3}} + 24 \, {\left(3 \, \sqrt{61} \sqrt{3} + 62\right)}^{\frac{4}{3}} + 313 \, \sqrt{61} \sqrt{3} + 5004}{12 \, {\left(3 \, \sqrt{61} \sqrt{3} + 62\right)}^{\frac{4}{3}}}
-4.68175084801457
-'''
+
+file_dir = os.path.dirname(__file__)
+out_file_path = os.path.join(file_dir, 'grobner-out.txt')
+with open(out_file_path, 'w') as f:
+    print(f'({wanted_x_n}, {wanted_y_n}), {n_ans}')  # (0.817182646506771, 0.576378801005197), 4.68175084801457
+    f.write(f'已吓哭~\nx的数值解 = {wanted_x_n}\ny的数值解 = {wanted_y_n}\ny = {latex(wanted_y)}\nans = {ans}\n{latex(ans)}\nans_simplified = {latex(ans_simplified)}\n{n_ans}\n')
