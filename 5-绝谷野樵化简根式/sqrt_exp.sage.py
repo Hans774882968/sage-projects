@@ -22,6 +22,7 @@ _sage_const_18 = Integer(18)
 _sage_const_67 = Integer(67)
 _sage_const_233 = Integer(233)
 _sage_const_24 = Integer(24)
+_sage_const_10 = Integer(10)
 K = NumberField([x ** _sage_const_2 - _sage_const_2, x ** _sage_const_2 - _sage_const_3], names=('sqrt2', 'sqrt3',))
 (sqrt2, sqrt3,) = K._first_ngens(2)
 sqrt6 = sqrt2 * sqrt3
@@ -63,3 +64,59 @@ print(val1, val2, val3, val4)
 (66360*sqrt3 + 125007)*sqrt2 + 96538*sqrt3 + 181447
 (-120*sqrt3 + 224)*sqrt2 + 184*sqrt3 - 296
 '''
+
+
+def get_expr_from_sol(sol, s2, s3):
+    s6 = s2 * s3
+    res = sol['a'] + sol['b'] * s2 + sol['c'] * s3 + sol['d'] * s6
+    return res
+
+
+def check_solve_sqrt236_whole_sage1():
+    print('-' * _sage_const_10 + 'check_solve_sqrt236_whole_sage1()' + '-' * _sage_const_10)
+    K1 = NumberField([x ** _sage_const_2 - _sage_const_2, x ** _sage_const_2 - _sage_const_3], names=('s2', 's3',))
+    (s2, s3,) = K1._first_ngens(2)
+    sol_list = [
+        ({'d': _sage_const_7 / _sage_const_6, 'c': _sage_const_4 / _sage_const_3, 'b': _sage_const_3 / _sage_const_2, 'a': _sage_const_8}, _sage_const_3),
+        ({'d': _sage_const_1 / _sage_const_6, 'c': _sage_const_1 / _sage_const_3, 'b': _sage_const_1 / _sage_const_2, 'a': _sage_const_1}, _sage_const_2),
+        ({'d': _sage_const_7 / _sage_const_6, 'c': _sage_const_1, 'b': _sage_const_0, 'a': _sage_const_0}, _sage_const_2),
+        ({'d': _sage_const_0, 'c': _sage_const_0, 'b': -_sage_const_1 / _sage_const_2 * s3 * s2, 'a': -_sage_const_7 / _sage_const_6 * s3 * s2}, _sage_const_2),
+        ({'d': _sage_const_3 / _sage_const_4, 'c': _sage_const_4 / _sage_const_3, 'b': _sage_const_0, 'a': _sage_const_1}, _sage_const_2),
+        ({'d': _sage_const_0, 'c': -_sage_const_1 / _sage_const_3 * s3, 'b': -_sage_const_3 / _sage_const_4 * s3, 'a': -_sage_const_4 / _sage_const_3 * s3}, _sage_const_2),
+        ({'d': _sage_const_0, 'c': _sage_const_9, 'b': _sage_const_11, 'a': _sage_const_0}, _sage_const_5),
+        ({'d': _sage_const_0, 'c': _sage_const_9, 'b': _sage_const_11, 'a': _sage_const_0}, _sage_const_6),
+        ({'d': _sage_const_0, 'c': _sage_const_2, 'b': _sage_const_3, 'a': _sage_const_7}, _sage_const_5),
+        ({'d': _sage_const_0, 'c': _sage_const_1, 'b': _sage_const_1, 'a': -_sage_const_1}, _sage_const_5),
+    ]
+    for sol, pw in sol_list:
+        expr = get_expr_from_sol(sol, s2, s3)
+        val = expr ** pw
+        print(val)
+
+
+def check_solve_sqrt236_whole_sage2():
+    print('-' * _sage_const_10 + 'check_solve_sqrt236_whole_sage2()' + '-' * _sage_const_10)
+    S = PolynomialRing(QQ, order='lex', names=('a', 'b', 'c', 'd', 's2', 's3',))
+    (a, b, c, d, s2, s3,) = S._first_ngens(6)
+    I = S.ideal([s2 ** _sage_const_2 - _sage_const_2, s3 ** _sage_const_2 - _sage_const_3])
+    Quo = S.quotient(I)
+    sol_list = [
+        ({'d': _sage_const_7 / _sage_const_6, 'c': _sage_const_4 / _sage_const_3, 'b': _sage_const_3 / _sage_const_2, 'a': _sage_const_8}, _sage_const_3),
+        ({'d': _sage_const_1 / _sage_const_6, 'c': _sage_const_1 / _sage_const_3, 'b': _sage_const_1 / _sage_const_2, 'a': _sage_const_1}, _sage_const_2),
+        ({'d': _sage_const_7 / _sage_const_6, 'c': _sage_const_1, 'b': _sage_const_0, 'a': _sage_const_0}, _sage_const_2),
+        ({'d': _sage_const_0, 'c': _sage_const_0, 'b': -_sage_const_1 / _sage_const_2 * s3 * s2, 'a': -_sage_const_7 / _sage_const_6 * s3 * s2}, _sage_const_2),
+        ({'d': _sage_const_3 / _sage_const_4, 'c': _sage_const_4 / _sage_const_3, 'b': _sage_const_0, 'a': _sage_const_1}, _sage_const_2),
+        ({'d': _sage_const_0, 'c': -_sage_const_1 / _sage_const_3 * s3, 'b': -_sage_const_3 / _sage_const_4 * s3, 'a': -_sage_const_4 / _sage_const_3 * s3}, _sage_const_2),
+        ({'d': _sage_const_0, 'c': _sage_const_9, 'b': _sage_const_11, 'a': _sage_const_0}, _sage_const_5),
+        ({'d': _sage_const_0, 'c': _sage_const_9, 'b': _sage_const_11, 'a': _sage_const_0}, _sage_const_6),
+        ({'d': _sage_const_0, 'c': _sage_const_2, 'b': _sage_const_3, 'a': _sage_const_7}, _sage_const_5),
+        ({'d': _sage_const_0, 'c': _sage_const_1, 'b': _sage_const_1, 'a': -_sage_const_1}, _sage_const_5),
+    ]
+    for sol, pw in sol_list:
+        expr = get_expr_from_sol(sol, s2, s3)
+        val = Quo(expr ** pw).lift()
+        print(val)
+
+
+check_solve_sqrt236_whole_sage1()
+check_solve_sqrt236_whole_sage2()

@@ -54,7 +54,10 @@ _sage_const_10 = Integer(10)
 
 def solve_equation(c1, c2, c3, c4, pw, solve_last_poly=False):
     '''
-    TODO: 这个文件的能力是 solve_sqrt236.sage 的子集，这里仅作为教程保留
+    这个文件的能力是 solve_sqrt236.sage 和 solve_sqrt236_whole.sage 的子集
+
+    但这个文件必须保留，因为加入根号6后，跑Grobner基的时间无法接受
+
     解方程`(a+b*sqrt(2)+c*sqrt(3))^pw == c1+c2*sqrt(2)+c3*sqrt(3)+c4*sqrt(6)`
 
     :param c1: 常数项
