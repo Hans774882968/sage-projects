@@ -91,7 +91,7 @@ def check_solve_sqrt236_whole_sage1():
     for sol, pw in sol_list:
         expr = get_expr_from_sol(sol, s2, s3)
         val = expr ** pw
-        print(val)
+        print(expr, '|', val)
 
 
 def check_solve_sqrt236_whole_sage2():
@@ -115,7 +115,7 @@ def check_solve_sqrt236_whole_sage2():
     for sol, pw in sol_list:
         expr = get_expr_from_sol(sol, s2, s3)
         val = Quo(expr ** pw).lift()
-        print(val)
+        print(expr, '|', val)
 
 
 check_solve_sqrt236_whole_sage1()

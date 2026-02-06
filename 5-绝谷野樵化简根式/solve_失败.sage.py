@@ -25,6 +25,7 @@ expanded = expr ** _sage_const_3
 
 # 这个文件不管怎么改都是失败。 vector_space, absolute_vector_space, relative_vector_space 都失败
 # 这里作为失败的尝试保留下来
+# 成功的尝试见 5-绝谷野樵化简根式/sqrt_exp.sage
 V, from_V, to_V = K.relative_vector_space()
 vec = to_V(expanded)
 
